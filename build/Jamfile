@@ -8,7 +8,6 @@
 #
 
 import ac ;
-import path ;
 import ../../config/checks/config : requires ;
 
 using zlib ;
@@ -38,7 +37,7 @@ project boost/http_proto
     : source-location $(HTTP_PROTO_ROOT)
     ;
 
-alias http_proto_sources : [ path.glob-tree $(HTTP_PROTO_ROOT)/src : *.cpp ] ;
+alias http_proto_sources : [ glob-tree-ex $(HTTP_PROTO_ROOT)/src : *.cpp ] ;
 
 explicit http_proto_sources ;
 
@@ -52,7 +51,7 @@ lib boost_http_proto
      <library>/boost//url
    ;
 
-alias http_proto_zlib_sources : [ path.glob-tree $(HTTP_PROTO_ROOT)/src_zlib : *.cpp ] ;
+alias http_proto_zlib_sources : [ glob-tree-ex $(HTTP_PROTO_ROOT)/src_zlib : *.cpp ] ;
 
 explicit http_proto_zlib_sources ;
 
