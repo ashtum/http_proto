@@ -33,13 +33,13 @@ struct BOOST_SYMBOL_VISIBLE
     error_cat_type
     : system::error_category
 {
-    BOOST_HTTP_PROTO_ZLIB_DECL const char* name(
+    BOOST_HTTP_PROTO_DECL const char* name(
         ) const noexcept override;
-    BOOST_HTTP_PROTO_ZLIB_DECL bool failed(
+    BOOST_HTTP_PROTO_DECL bool failed(
         int) const noexcept override;
-    BOOST_HTTP_PROTO_ZLIB_DECL std::string message(
+    BOOST_HTTP_PROTO_DECL std::string message(
         int) const override;
-    BOOST_HTTP_PROTO_ZLIB_DECL char const* message(
+    BOOST_HTTP_PROTO_DECL char const* message(
         int, char*, std::size_t
             ) const noexcept override;
     BOOST_SYSTEM_CONSTEXPR error_cat_type()
@@ -48,7 +48,7 @@ struct BOOST_SYMBOL_VISIBLE
     }
 };
 
-BOOST_HTTP_PROTO_ZLIB_DECL extern
+BOOST_HTTP_PROTO_DECL extern
     error_cat_type error_cat;
 
 } // detail
