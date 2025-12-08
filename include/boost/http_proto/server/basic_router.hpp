@@ -132,6 +132,8 @@ private:
 };
 
 //-----------------------------------------------
+
+//-----------------------------------------------
  
 //namespace detail {
 
@@ -1009,6 +1011,11 @@ private:
             }
             catch(E const& ex)
             {
+#ifdef __APPLE__
+                static volatile int c = 0;
+                if(c != 0)
+                    p_.ep_ = nullptr;
+#endif // APPLE
                 set_resume u(p_);
                 // VFALCO What if h throws?
                 auto rv = h(p, ex);
