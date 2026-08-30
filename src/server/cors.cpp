@@ -40,7 +40,7 @@ struct Vary
         auto it = rp_.res.find(f);
         if(it != rp_.res.end())
         {
-            std::string s = it->value;
+            std::string s(it->value);
             s += ", ";
             s += v;
             rp_.res.set(it, s);

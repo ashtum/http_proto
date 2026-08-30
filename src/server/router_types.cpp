@@ -145,12 +145,12 @@ send(std::string_view body)
     if(sc == status::reset_content)
     {
         res.erase(field::transfer_encoding);
-        res.set_payload_size(0);
+        res.set_content_length(0);
         co_return co_await res_body.write_eof();
     }
 
     // Set Content-Type if not already set
-    if(! res.exists(field::content_type))
+    if(! res.contains(field::content_type))
     {
         if(! body.empty() && body[0] == '<')
             res.set(field::content_type,
@@ -161,12 +161,12 @@ send(std::string_view body)
     }
 
     // Generate ETag if not already set
-    if(! res.exists(field::etag))
+    if(! res.contains(field::etag))
         res.set(field::etag, etag(body));
 
     // Set Content-Length if not already set
-    if(! res.exists(field::content_length))
-        res.set_payload_size(body.size());
+    if(! res.contains(field::content_length))
+        res.set_content_length(body.size());
 
     // Freshness check: auto-304 for conditional GET
     if(is_fresh(req, res))

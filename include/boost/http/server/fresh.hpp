@@ -11,8 +11,8 @@
 #define BOOST_HTTP_SERVER_FRESH_HPP
 
 #include <boost/http/detail/config.hpp>
-#include <boost/http/request.hpp>
-#include <boost/http/response.hpp>
+#include <boost/http/request_head.hpp>
+#include <boost/http/response_head.hpp>
 
 namespace boost {
 namespace http {
@@ -56,8 +56,8 @@ namespace http {
 BOOST_HTTP_DECL
 bool
 is_fresh(
-    request const& req,
-    response const& res) noexcept;
+    request_head const& req,
+    response_head const& res) noexcept;
 
 } // http
 } // boost

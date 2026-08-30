@@ -158,7 +158,7 @@ send_file_init(
 
             auto const content_length =
                 range.end - range.start + 1;
-            rp.res.set_payload_size(
+            rp.res.set_content_length(
                 static_cast<std::uint64_t>(content_length));
 
             // Content-Range header
@@ -186,7 +186,7 @@ send_file_init(
 
     // Full content response
     rp.res.set_status(status::ok);
-    rp.res.set_payload_size(info.size);
+    rp.res.set_content_length(info.size);
     info.range_start = 0;
     info.range_end = static_cast<std::int64_t>(info.size) - 1;
     info.result = send_file_result::ok;

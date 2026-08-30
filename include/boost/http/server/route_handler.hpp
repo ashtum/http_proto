@@ -14,8 +14,8 @@
 #include <boost/http/method.hpp>
 #include <boost/http/detail/except.hpp>
 #include <boost/http/datastore.hpp>
-#include <boost/http/request.hpp>
-#include <boost/http/response.hpp>
+#include <boost/http/request_head.hpp>
+#include <boost/http/response_head.hpp>
 #include <boost/core/detail/string_view.hpp>
 #include <boost/capy/buffers.hpp>
 #include <boost/capy/buffers/make_buffer.hpp>
@@ -221,7 +221,7 @@ inline constexpr decltype(auto) route_done = route_result::route_done;
     @code
     route_task auth_handler(route_params& p)
     {
-        if(! p.req.exists(field::authorization))
+        if(! p.req.contains(field::authorization))
             co_return route_next;  // let another handler try
 
         // process authenticated request...
@@ -419,10 +419,10 @@ public:
     urls::url_view url;
 
     /// The HTTP request
-    http::request req;
+    http::request_head req;
 
     /// The HTTP response
-    http::response res;
+    http::response_head res;
 
     /// Provides access to the request body
     http::any_buffer_source req_body;

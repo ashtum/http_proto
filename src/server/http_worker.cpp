@@ -46,7 +46,8 @@ do_http_session()
         rp.session_data.clear();
 
         // Read HTTP request header
-        auto [ec] = co_await parser.read_header(stream);
+        auto [ec] = co_await http::message_reader(
+            &stream, &parser).read_header();
         if(ec)
         {
             std::cerr << "read_header error: " << ec.message() << "\n";
@@ -60,7 +61,8 @@ do_http_session()
         rp.res.set_start_line(
             http::status::ok, rp.req.version());
         rp.res.set_keep_alive(rp.req.keep_alive());
-        serializer.reset();
+
+        serializer.start(&rp.res);
 
         // Parse the URL
         {

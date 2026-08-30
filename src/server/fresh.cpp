@@ -79,8 +79,8 @@ not_modified_since(
 
 bool
 is_fresh(
-    request const& req,
-    response const& res ) noexcept
+    request_head const& req,
+    response_head const& res ) noexcept
 {
     // Get conditional request headers
     auto const if_none_match = req.value_or(
